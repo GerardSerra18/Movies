@@ -1,10 +1,8 @@
 package main
 
 import (
-	//"database/sql"
 	"log"
 	"net/http"
-	//"os"
 	"time"
 	"Movies/controller"
 	_"github.com/lib/pq"
@@ -23,17 +21,16 @@ func main() {
         log.Fatal(err)
     }
     
-    // Create actor controller
+    // Create movie controller
     movieCtrl := controller.NewMovieController(db)
 
     // Create router
     mux := http.NewServeMux()
-    mux.HandleFunc("/actors/create", movieCtrl.CreateMovieHandler)
-	mux.HandleFunc("/actors/get", movieCtrl.GetMovieHandler)
-    mux.HandleFunc("/actors/view", movieCtrl.ViewMovieHandler)
-    mux.HandleFunc("/actors/update", movieCtrl.UpdateMovieHandler)
-    mux.HandleFunc("/actors/delete", movieCtrl.DeleteMovieHandler)
-    mux.Handle("/actors/images/", http.StripPrefix("/movies/images/", http.FileServer(http.Dir("movies/images"))))
+    mux.HandleFunc("/movies/create", movieCtrl.CreateMovieHandler)
+	mux.HandleFunc("/movies/get", movieCtrl.GetMovieHandler)
+    mux.HandleFunc("/movies/view", movieCtrl.ViewMovieHandler)
+    mux.HandleFunc("/movies/update", movieCtrl.UpdateMovieHandler)
+    mux.HandleFunc("/movies/delete", movieCtrl.DeleteMovieHandler)
 
     // Create server
     server := &http.Server{
